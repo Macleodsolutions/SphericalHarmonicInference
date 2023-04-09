@@ -13,14 +13,12 @@ const ImageCanvas = (props: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let image: HTMLImageElement;
   const [topResultLabel, setLabel] = useState("");
-  const [topResultConfidence, setConfidence] = useState("");
   const [inferenceTime, setInferenceTime] = useState("");
   
   // Load the image from the IMAGE_URLS array
   const getImage = () => {
     const sampleImageUrls: Array<{ text: string; value: string }> = IMAGE_URLS;
-    const random = Math.floor(Math.random() * (9 - 0 + 1) + 0);
-    return sampleImageUrls[random];
+    return sampleImageUrls[0];
   }
 
   // Draw image and other  UI elements then run inference
@@ -32,7 +30,6 @@ const ImageCanvas = (props: Props) => {
 
     // Clear out previous values.
     setLabel(`Inferencing...`);
-    setConfidence("");
     setInferenceTime("");
 
     // Draw the image on the canvas
@@ -50,13 +47,9 @@ const ImageCanvas = (props: Props) => {
 
     // Get the image data from the canvas and submit inference.
     const [inferenceResult, inferenceTime] = await inferenceSqueezenet(image.src);
-
-    // Get the highest confidence.
-    const topResult = inferenceResult[0];
-
+    console.log(inferenceResult);
     // Update the label and confidence
-    setLabel(topResult.name.toUpperCase());
-    setConfidence(topResult.probability);
+    setLabel(inferenceResult.toString());
     setInferenceTime(`Inference speed: ${inferenceTime} seconds`);
 
   };
@@ -70,7 +63,7 @@ const ImageCanvas = (props: Props) => {
       </button>
       <br/>
       <canvas ref={canvasRef} width={props.width} height={props.height} />
-      <span>{topResultLabel} {topResultConfidence}</span>
+      <span>{topResultLabel}</span>
       <span>{inferenceTime}</span>
     </>
   )

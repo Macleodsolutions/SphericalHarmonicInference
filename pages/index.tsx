@@ -19,7 +19,7 @@ const Home: NextPage = () => {
           Use ORT Web
         </h1>
 
-      <ImageCanvas width={240} height={240}/>
+      <ImageCanvas width={1024} height={512}/>
       <div id="result" className="mt-3">
       </div>
       </main>
