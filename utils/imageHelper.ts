@@ -1,20 +1,14 @@
 import * as Jimp from 'jimp';
-import { Tensor } from 'onnxruntime-web';
+import {Tensor} from 'onnxruntime-web';
 
 export async function getImageTensorFromPath(path: string, dims: number[] =  [1, 3, 512, 1024]): Promise<Tensor> {
-  // 1. load the image  
   const image = await loadImageFromPath(path);
-  // 2. convert to tensor
-  const imageTensor = imageDataToTensor(image, dims);
-  // 3. return the tensor
-  return imageTensor;
+  return imageDataToTensor(image, dims);
 }
 
 async function loadImageFromPath(path: string): Promise<Jimp> {
   // Use Jimp to load the image and resize it.
-  const imageData = await Jimp.default.read(path);
-
-  return imageData;
+  return await Jimp.default.read(path);
 }
 function imageDataToTensor(image: Jimp, dims: number[]): Tensor {
   // 1. Get buffer data from image and create R, G, and B arrays.
@@ -37,8 +31,7 @@ function imageDataToTensor(image: Jimp, dims: number[]): Tensor {
   }
 
   // 3. Create the tensor object from onnxruntime-web.
-  const tensor = new Tensor(float32Data, dims);
-  return tensor;
+  return new Tensor(float32Data, dims);
 }
 
 

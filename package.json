@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/three": "^0.150.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "fs": "^0.0.1-security",
     "jimp": "^0.16.1",
@@ -19,6 +20,7 @@
     "onnxruntime-web": "^1.14.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "three": "^0.151.3",
     "yarn": "^1.22.19"
   },
   "devDependencies": {

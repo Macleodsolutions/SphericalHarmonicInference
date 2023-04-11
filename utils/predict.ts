@@ -1,9 +1,21 @@
 // Language: typescript
 // Path: react-next\utils\predict.ts
 import { getImageTensorFromPath } from './imageHelper';
-import {runSHCModel} from './modelHelper';
+import { loadSHCModel, runSHCModel } from './modelHelper';
 
-export async function inferenceSqueezenet(path: string): Promise<[any,number]> {
+let modelLoaded = false;
+
+async function ensureModelLoaded(): Promise<void> {
+  if (!modelLoaded) {
+    await loadSHCModel();
+    modelLoaded = true;
+  }
+}
+
+export async function inference(path: string): Promise<[any, number]> {
+  // 0. Ensure the model is loaded
+  await ensureModelLoaded();
+
   // 1. Convert image to tensor
   const imageTensor = await getImageTensorFromPath(path);
 
@@ -13,4 +25,3 @@ export async function inferenceSqueezenet(path: string): Promise<[any,number]> {
   // 3. Return predictions and the amount of time it took to inference.
   return [predictions, inferenceTime];
 }
-
