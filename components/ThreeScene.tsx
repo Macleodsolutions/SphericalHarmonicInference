@@ -26,7 +26,7 @@ const SKYDOME_HEIGHT_SEGMENTS = 40;
 
 // Define the paths to the image and video sources
 const IMAGE_SRC = './_next/static/chunks/pages/shanghai_bund.png';
-const RANDOM_IMAGE_SRC = 'https://source.unsplash.com/random/?Panorama&1';
+//const RANDOM_IMAGE_SRC = 'https://source.unsplash.com/random/?Panorama&1';
 const VIDEO_SRC = './_next/static/chunks/pages/pexels-anna-hinckel-6128683-1920x1080-50fps.mp4';
 
 // Define an interface for the properties of the ThreeScene component
