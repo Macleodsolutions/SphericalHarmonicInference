@@ -1,14 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import ImageCanvas from "../components/ImageCanvas";
 import ThreeScene from "../components/ThreeScene";
-import {useState} from "react";
-
 
 const Home: NextPage = () => {
-    const [imageSrc, setImageSrc] = useState<string>('https://i.imgur.com/jVnHEIv.png'); // Set a default image source here
-    const [topResultLabel, setTopResultLabel] = useState<[]>([]);
   return (
     <div className={styles.container}>
       <Head>
@@ -20,8 +15,7 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>
           Use ORT Web
         </h1>
-          <ThreeScene width={800} height={600} imageSrc={imageSrc} label={topResultLabel} />
-          <ImageCanvas onImageLoad={setImageSrc} onLabelChange={setTopResultLabel} />
+          <ThreeScene width={800} height={600}/>
       <div id="result" className="mt-3">
       </div>
       </main>

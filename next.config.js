@@ -11,7 +11,7 @@ module.exports = {
     config.resolve.fallback = { fs: false };
 
     config.plugins.push(
-    new NodePolyfillPlugin(), 
+    new NodePolyfillPlugin(),
     new CopyPlugin({
       patterns: [
         {
@@ -20,11 +20,15 @@ module.exports = {
         },             {
           from: './node_modules/onnxruntime-web/dist/ort-wasm-simd.wasm',
           to: 'static/chunks/pages',
-        },          
+        },
           {
             from: './model',
             to: 'static/chunks/pages',
           },
+        {
+          from: './data',
+          to: 'static/chunks/pages',
+        },
         ],
       }),
     );

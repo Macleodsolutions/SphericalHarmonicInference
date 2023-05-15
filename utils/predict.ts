@@ -12,12 +12,12 @@ async function ensureModelLoaded(): Promise<void> {
   }
 }
 
-export async function inference(path: string): Promise<[any, number]> {
+export async function inference(path: Uint8ClampedArray, height:number,width:number): Promise<[any, number]> {
   // 0. Ensure the model is loaded
   await ensureModelLoaded();
 
   // 1. Convert image to tensor
-  const imageTensor = await getImageTensorFromPath(path);
+  const imageTensor = await getImageTensorFromPath(path,[1,3,height,width]);
 
   // 2. Run model
   const [predictions, inferenceTime] = await runSHCModel(imageTensor);
