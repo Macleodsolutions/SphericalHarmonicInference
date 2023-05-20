@@ -1,24 +1,28 @@
-import {MeshBasicMaterial} from "three";
+import { MeshBasicMaterial } from "three";
 
 function editShaderForSHC(material: MeshBasicMaterial) {
+  // Initialize SHC in the material's user data
+  material.userData.SphericalHarmonicCoefficients = { value: [] };
 
-    // Initialize SHC in the material's user data
-    material.userData.SphericalHarmonicCoefficients = {value: []};
+  material.onBeforeCompile = (shader) => {
+    shader.uniforms.SphericalHarmonicCoefficients =
+      material.userData.SphericalHarmonicCoefficients;
 
-    material.onBeforeCompile = shader => {
-
-        shader.uniforms.SphericalHarmonicCoefficients = material.userData.SphericalHarmonicCoefficients;
-
-        shader.vertexShader = `
+    shader.vertexShader = `
                 varying vec3 vNormal;
                 ${shader.vertexShader}
-            `.replace('#include <project_vertex>', `
+            `.replace(
+      "#include <project_vertex>",
+      `
                 #include <project_vertex>
                 vNormal = normal;
-            `);
+            `
+    );
 
-        // Modify the fragment shader to use SHC for calculating light irradiance
-        shader.fragmentShader = shader.fragmentShader.replace('#include <clipping_planes_pars_fragment>', `
+    // Modify the fragment shader to use SHC for calculating light irradiance
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "#include <clipping_planes_pars_fragment>",
+      `
             // Define a structure to hold the SHC
             struct SHCoefficients {
                     vec3 l00, l1m1, l10, l11, l2m2, l2m1, l20, l21, l22;
@@ -67,9 +71,12 @@ function editShaderForSHC(material: MeshBasicMaterial) {
             }
             
             #include <clipping_planes_pars_fragment>
-            `);
+            `
+    );
 
-        shader.fragmentShader = shader.fragmentShader.replace('#include <dithering_fragment>', `
+    shader.fragmentShader = shader.fragmentShader.replace(
+      "#include <dithering_fragment>",
+      `
             // Create SHCoefficients structure from the uniform array
             SHCoefficients shCoefficients = createSHCoefficients(SphericalHarmonicCoefficients);
             
@@ -81,10 +88,11 @@ function editShaderForSHC(material: MeshBasicMaterial) {
             
             // Include the original shader code
             #include <dithering_fragment>
-            `);
-    };
+            `
+    );
+  };
 
-    return material;
+  return material;
 }
 
-export default editShaderForSHC
+export default editShaderForSHC;

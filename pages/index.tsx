@@ -1,6 +1,6 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import type { NextPage } from "next";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 import ThreeScene from "../components/ThreeScene";
 
 const Home: NextPage = () => {
@@ -12,12 +12,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Use ORT Web
-        </h1>
-          <ThreeScene width={800} height={600}/>
-      <div id="result" className="mt-3">
-      </div>
+        <h1 className={styles.title}>Use ORT Web</h1>
+        <ThreeScene width={800} height={600} />
+        <div id="result" className="mt-3"></div>
       </main>
 
       <footer className={styles.footer}>
@@ -25,11 +22,10 @@ const Home: NextPage = () => {
           href="https://onnxruntime.ai/docs"
           target="_blank"
           rel="noopener noreferrer"
-        >
-        </a>
+        ></a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
 export default Home

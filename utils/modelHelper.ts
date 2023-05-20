@@ -1,34 +1,42 @@
-import * as ort from 'onnxruntime-web';
+import * as ort from "onnxruntime-web";
 
 let session: ort.InferenceSession | null = null;
 
 export async function loadSHCModel(): Promise<void> {
   try {
     // Create an inference session to run the model, with WebGL as the execution provider and enabling all graph optimizations
-    session = await ort.InferenceSession.create('./_next/static/chunks/pages/SHC.onnx', {
-      executionProviders: ['webgl'],
-      graphOptimizationLevel: 'all',
-    });
-    console.log('Inference session created');
+    session = await ort.InferenceSession.create(
+      "./_next/static/chunks/pages/model.onnx",
+      {
+        executionProviders: ["webgl"],
+        graphOptimizationLevel: "all",
+      }
+    );
+    console.log("Inference session created");
   } catch (error) {
-    console.error('Failed to load the model:', error);
+    console.error("Failed to load the model:", error);
   }
 }
 
-export async function runSHCModel(preprocessedData: any): Promise<[any, number]> {
+export async function runSHCModel(
+  preprocessedData: any
+): Promise<[any, number]> {
   if (!session) {
-    throw new Error('Model not loaded');
+    throw new Error("Model not loaded");
   }
 
   // Run inference on the preprocessed data and get the results and the inference time
-  const [results, inferenceTime] = await runInference(session, preprocessedData);
+  const [results, inferenceTime] = await runInference(
+    session,
+    preprocessedData
+  );
   return [results, inferenceTime];
 }
 
 // Function to run the inference
 async function runInference(
-    session: ort.InferenceSession,
-    preprocessedData: any
+  session: ort.InferenceSession,
+  preprocessedData: any
 ): Promise<[any, number]> {
   // Start a timer
   const start = new Date();
@@ -47,7 +55,9 @@ async function runInference(
   return [output.data, inferenceTime];
 }
 
-export const calculateMovingAverage = (buffer: Float32Array[]): Float32Array => {
+export const calculateMovingAverage = (
+  buffer: Float32Array[]
+): Float32Array => {
   // Get the number of coefficients in the buffer
   const numCoefficients = buffer[0].length;
   // Create a new Float32Array to hold the averaged SHCs
