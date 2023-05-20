@@ -23,7 +23,11 @@
 
 <br />
 
-<h3 align="center">![rain_demo.mp4](https://raw.githubusercontent.com/Macleodsolutions/SphericalHarmonicInference/main/screenshots/rain_demo.mp4)</h3>
+<h3 align="center">
+
+
+
+</h3>
 
 <h3 align="center">Inferring spherical harmonic coefficients
 </br> from non-hdr sources at interactive framerates
@@ -31,7 +35,6 @@
 </h3>
 
   <p align="center">
-    <br />
     <a href="https://macleodsolutions.github.io/SphericalHarmonicInference/">View Demo</a>
     ·
     <a href="https://github.com/Macleodsolutions/SphericalHarmonicInference/issues">Report Bug</a>
@@ -39,7 +42,17 @@
     <a href="https://github.com/Macleodsolutions/SphericalHarmonicInference/issues">Request Feature</a>
   </p>
 
-### Built With
+<p align="center">
+ 
+<!-- ABOUT THE PROJECT -->
+![Screenshot 2023-05-17 230935.png](https://raw.githubusercontent.com/Macleodsolutions/SphericalHarmonicInference/main/screenshots/screenshot_1.png)
+![Screenshot 2023-05-17 215602.png](https://raw.githubusercontent.com/Macleodsolutions/SphericalHarmonicInference/main/screenshots/screenshot_2.png)
+  
+  https://github.com/Macleodsolutions/SphericalHarmonicInference/assets/16354230/c8fe0081-0d17-4155-b6f3-952e295f20a1
+
+  </p>
+  
+  ### Built With
 
 * [![Blender][Blender]][Blender-url]
 * [![Python][Python]][Python-url]
@@ -52,11 +65,7 @@
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![WebGL][WebGL]][WebGL-url]
-
-<!-- ABOUT THE PROJECT -->
-![Screenshot 2023-05-17 230935.png](https://raw.githubusercontent.com/Macleodsolutions/SphericalHarmonicInference/main/screenshots/screenshot_1.png)
-![Screenshot 2023-05-17 215602.png](https://raw.githubusercontent.com/Macleodsolutions/SphericalHarmonicInference/main/screenshots/screenshot_2.png)
-
+  
 ## Motivation
 
 My primary motivation for these experiments was to deploy a client side pytorch solution from scratch. We've deployed
@@ -64,7 +73,7 @@ several production ready inference models, but this usually happens through a se
 using off-the-shelf frameworks tailored to our training sets.
 
 What I was looking to do with this project was take a generic problem first and subsequently see how well I could
-develop a pytorch solution from scratch. Bonus points for running a constant live inference process.
+backtrack and build out the elements of the framework step by step. Bonus points for running a constant live inference process.
 
 So our key acceptance criteria here is:
 
@@ -88,7 +97,7 @@ multiple high quality sources, plus this meets the bonus criteria of running con
 
 ## Data Prep
 
-This part was the most straight forward, PolyHaven provides an api for scraping their library of .exr images.</br>
+This part was the most straight forward, [PolyHaven](https://polyhaven.com/) provides an api for scraping their library of .exr images.</br>
 After these are downloaded, we can do some data augmentation using Blender to re-render the .exrs with varying settings.
 
 In this experiment I used the initial 600ish exrs from polyhaven and augmented them to roughly 6500.
@@ -182,8 +191,6 @@ The scraping and data preparation are handled through two self-contained .blend 
 ### Training:
 
 For this experiment I used a conda environment running on Ubuntu 20.04 under WSL2 on Windows 11.
-</br>Anecdotally I'm a huge fan of the interoperability that's been provided by WSL, full speed linux GPU pass through
-and easy filesystem interop, literally a dream dev environment.
 
 1. Create a new conda environment:
    ```sh
